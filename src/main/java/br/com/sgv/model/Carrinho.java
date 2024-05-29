@@ -27,7 +27,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Venda implements Serializable{
+public class Carrinho implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
@@ -51,7 +51,7 @@ public class Venda implements Serializable{
         try {
             data = formato.parse(dataVenda);
         } catch (ParseException ex) {
-            Logger.getLogger(Venda.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Carrinho.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dataVenda = data;
     }
@@ -70,6 +70,11 @@ public class Venda implements Serializable{
             soma += i.getProduto().getPreco() * i.getQuantidade();
         }
         return soma;
+        /*if soma >= 100{
+            return (float) (soma*0.9);
+            calcularPontos(soma);
+            setPontos(soma/10);}*/
+       
     }
     
 }

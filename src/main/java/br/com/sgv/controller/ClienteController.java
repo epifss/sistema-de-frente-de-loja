@@ -1,7 +1,6 @@
 package br.com.sgv.controller;
 
-import br.com.sgv.model.PessoaFisica;
-import br.com.sgv.repository.PessoaFisicaRepository;
+import br.com.sgv.model.Cliente;
 import jakarta.validation.Valid;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import br.com.sgv.repository.ClienteRepository;
 
 /**
  *
@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @brief class PessoaFisicaController
  */
 @Controller
-public class PessoaFisicaController {
+public class ClienteController {
 
     @Autowired
-    private PessoaFisicaRepository pessoaFisicaRepository;
+    private ClienteRepository pessoaFisicaRepository;
 
     @GetMapping("/pessoas-fisicas")
     public String listar(Model model) {
@@ -33,19 +33,19 @@ public class PessoaFisicaController {
 
     @GetMapping("/pessoas-fisicas/novo")
     public String novo(Model model) {
-        model.addAttribute("pessoaFisica", new PessoaFisica());
+        model.addAttribute("pessoaFisica", new Cliente());
         return "editar_pessoa_fisica";
     }
 
     @GetMapping("/pessoas-fisicas/{id}")
     public String editar(@PathVariable("id") long id, Model model) {
-        Optional<PessoaFisica> pessoaFisica = pessoaFisicaRepository.findById(id);
+        Optional<Cliente> pessoaFisica = pessoaFisicaRepository.findById(id);
         model.addAttribute("pessoaFisica", pessoaFisica.get());
         return "editar_pessoa_fisica";
     }
 
     @PostMapping("/pessoas-fisicas")
-    public String salvar(@Valid PessoaFisica pessoaFisica, BindingResult result) {
+    public String salvar(@Valid Cliente pessoaFisica, BindingResult result) {
         if (result.hasErrors()) {
             return "editar_pessoa_fisica";
         }

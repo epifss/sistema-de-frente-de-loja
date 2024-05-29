@@ -26,9 +26,10 @@ public abstract class Pessoa{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+    @Size(min=1,message = "O CPF precisa ser válido.")
+    private String cpf;
     @Size(min=1,message = "O nome precisa ser válido.")
     private String nome;
-
     @Override
     public String toString(){
         return nome;

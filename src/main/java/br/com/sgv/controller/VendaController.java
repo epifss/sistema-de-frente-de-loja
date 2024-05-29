@@ -1,7 +1,7 @@
 package br.com.sgv.controller;
 
 import br.com.sgv.model.Item;
-import br.com.sgv.model.Venda;
+import br.com.sgv.model.Carrinho;
 import br.com.sgv.repository.ProdutoRepository;
 import br.com.sgv.repository.VendaRepository;
 import jakarta.validation.Valid;
@@ -29,7 +29,7 @@ public class VendaController {
     private VendaRepository vendaRepository;
     @Autowired
     private ProdutoRepository produtoRepository;
-    private Venda venda;
+    private Carrinho venda;
 
     @GetMapping("/vendas")
     public String listarVendas(Model model) {
@@ -39,7 +39,7 @@ public class VendaController {
 
     @GetMapping("/vendas/novo")
     public String novo(Model model) {
-        venda = new Venda();
+        venda = new Carrinho();
         vendaRepository.save(venda);
         model.addAttribute("listaProdutos", produtoRepository.findAll());
         model.addAttribute("venda", venda);
@@ -49,7 +49,7 @@ public class VendaController {
 
     @GetMapping("/vendas/{id}")
     public String editar(@PathVariable("id") long idVenda, Model model) {
-        Optional<Venda> busca = vendaRepository.findById(idVenda);
+        Optional<Carrinho> busca = vendaRepository.findById(idVenda);
         venda = busca.get();
         model.addAttribute("venda", venda);
         model.addAttribute("item", new Item());
@@ -58,7 +58,7 @@ public class VendaController {
     }
 
     @PostMapping("/vendas")
-    public String salvar(@Valid Venda venda, BindingResult result) {
+    public String salvar(@Valid Carrinho venda, BindingResult result) {
         if (result.hasErrors()) {
             return "editar_venda";
         }
