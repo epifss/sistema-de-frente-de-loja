@@ -26,7 +26,7 @@ public abstract class Pessoa{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
-    @Size(min=1,message = "O CPF precisa ser válido.")
+    @Size(min = 1, max = 11, message = "O nome deverá ter no máximo {max} caracteres")
     private String cpf;
     @Size(min=1,message = "O nome precisa ser válido.")
     private String nome;

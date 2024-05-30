@@ -70,10 +70,6 @@ public class Carrinho implements Serializable{
             soma += i.getProduto().getPreco() * i.getQuantidade();
         }
         return soma;
-        /*if soma >= 100{
-            return (float) (soma*0.9);
-            calcularPontos(soma);
-            setPontos(soma/10);}*/
        
     }
     

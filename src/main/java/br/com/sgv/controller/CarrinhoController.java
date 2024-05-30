@@ -3,7 +3,6 @@ package br.com.sgv.controller;
 import br.com.sgv.model.Item;
 import br.com.sgv.model.Carrinho;
 import br.com.sgv.repository.ProdutoRepository;
-import br.com.sgv.repository.VendaRepository;
 import jakarta.validation.Valid;
 import java.util.Iterator;
 import java.util.Optional;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import br.com.sgv.repository.CarrinhoRepository;
 
 /**
  *
@@ -23,24 +23,24 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @brief class VendaController
  */
 @Controller
-public class VendaController {
+public class CarrinhoController {
 
     @Autowired
-    private VendaRepository vendaRepository;
+    private CarrinhoRepository CarrinhoRepository;
     @Autowired
     private ProdutoRepository produtoRepository;
     private Carrinho venda;
 
     @GetMapping("/vendas")
     public String listarVendas(Model model) {
-        model.addAttribute("listaVendas", vendaRepository.findAll());
+        model.addAttribute("listaVendas", CarrinhoRepository.findAll());
         return "gerenciar_vendas";
     }
 
     @GetMapping("/vendas/novo")
     public String novo(Model model) {
         venda = new Carrinho();
-        vendaRepository.save(venda);
+        CarrinhoRepository.save(venda);
         model.addAttribute("listaProdutos", produtoRepository.findAll());
         model.addAttribute("venda", venda);
         model.addAttribute("item", new Item());
@@ -49,7 +49,7 @@ public class VendaController {
 
     @GetMapping("/vendas/{id}")
     public String editar(@PathVariable("id") long idVenda, Model model) {
-        Optional<Carrinho> busca = vendaRepository.findById(idVenda);
+        Optional<Carrinho> busca = CarrinhoRepository.findById(idVenda);
         venda = busca.get();
         model.addAttribute("venda", venda);
         model.addAttribute("item", new Item());
@@ -63,7 +63,7 @@ public class VendaController {
             return "editar_venda";
         }
         this.venda.setDataVenda(venda.getDataVenda());
-        vendaRepository.save(this.venda);
+        CarrinhoRepository.save(this.venda);
         return "redirect:/vendas";
     }
     
@@ -75,7 +75,7 @@ public class VendaController {
         if (item.getProduto() != null){
             venda.adicionarItem(item);
             item.setVenda(venda);
-            vendaRepository.save(venda);
+            CarrinhoRepository.save(venda);
         }
         String url = "redirect:/vendas/"+venda.getId();
         return url;
@@ -95,7 +95,7 @@ public class VendaController {
         if (aux != null){
             venda.removerItem(aux);
             aux.setVenda(null);
-            vendaRepository.save(venda);
+            CarrinhoRepository.save(venda);
         }
         String url = "redirect:/vendas/"+venda.getId();
         return url;
@@ -103,7 +103,7 @@ public class VendaController {
     
     @DeleteMapping("/vendas/{id}")
     public String excluir(@PathVariable("id") long id) {
-        vendaRepository.deleteById(id);
+        CarrinhoRepository.deleteById(id);
         return "redirect:/vendas";
     }
 }

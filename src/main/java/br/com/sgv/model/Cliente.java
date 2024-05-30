@@ -9,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Cliente extends Pessoa{
+    private boolean Ouro;
     private int Pontos;
     public void calcularPontos(){
        // Pontos = /*venda*//10;

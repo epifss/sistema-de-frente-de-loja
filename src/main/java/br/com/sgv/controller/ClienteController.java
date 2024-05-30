@@ -23,39 +23,39 @@ import br.com.sgv.repository.ClienteRepository;
 public class ClienteController {
 
     @Autowired
-    private ClienteRepository pessoaFisicaRepository;
+    private ClienteRepository ClienteRepository;
 
-    @GetMapping("/pessoas-fisicas")
+    @GetMapping("/clientes")
     public String listar(Model model) {
-        model.addAttribute("listaPessoasFisicas", pessoaFisicaRepository.findAll());
-        return "gerenciar_pessoas_fisicas";
+        model.addAttribute("listaClientes", ClienteRepository.findAll());
+        return "gerenciar_clientes";
     }
 
-    @GetMapping("/pessoas-fisicas/novo")
+    @GetMapping("/clientes/novo")
     public String novo(Model model) {
-        model.addAttribute("pessoaFisica", new Cliente());
-        return "editar_pessoa_fisica";
+        model.addAttribute("cliente", new Cliente());
+        return "editar_cliente";
     }
 
-    @GetMapping("/pessoas-fisicas/{id}")
+    @GetMapping("/clientes/{id}")
     public String editar(@PathVariable("id") long id, Model model) {
-        Optional<Cliente> pessoaFisica = pessoaFisicaRepository.findById(id);
-        model.addAttribute("pessoaFisica", pessoaFisica.get());
-        return "editar_pessoa_fisica";
+        Optional<Cliente> Cliente = ClienteRepository.findById(id);
+        model.addAttribute("cliente", Cliente.get());
+        return "editar_cliente";
     }
 
-    @PostMapping("/pessoas-fisicas")
+    @PostMapping("/clientes")
     public String salvar(@Valid Cliente pessoaFisica, BindingResult result) {
         if (result.hasErrors()) {
-            return "editar_pessoa_fisica";
+            return "editar_cliente";
         }
-        pessoaFisicaRepository.save(pessoaFisica);
-        return "redirect:/pessoas-fisicas";
+        ClienteRepository.save(pessoaFisica);
+        return "redirect:/clientes";
     }
-
-    @DeleteMapping("/pessoas-fisicas/{id}")
+ 
+    @DeleteMapping("/clientes/{id}")
     public String excluir(@PathVariable("id") long id) {
-        pessoaFisicaRepository.deleteById(id);
-        return "redirect:/pessoas-fisicas";
+        ClienteRepository.deleteById(id);
+        return "redirect:/clientes";
     }
 }

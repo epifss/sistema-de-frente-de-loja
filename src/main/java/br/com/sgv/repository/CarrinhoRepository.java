@@ -7,6 +7,6 @@ import br.com.sgv.model.Carrinho;
  *
  * @author Pablo Rangel <pablo.rangel@gmail.com>
  */
-public interface VendaRepository extends CrudRepository<Carrinho,Long>{
+public interface CarrinhoRepository extends CrudRepository<Carrinho,Long>{
     
 }
