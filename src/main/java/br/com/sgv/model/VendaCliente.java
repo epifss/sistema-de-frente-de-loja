@@ -24,6 +24,10 @@ public class VendaCliente extends Venda{
         for (Item i : getListaItens()){
             soma += i.getProduto().getPreco() * i.getQuantidade();
         }
-        return soma;
+        if (soma>=500) {
+            return soma * 0.9;
+        }else{
+            return soma;
+    }
     }
 }
