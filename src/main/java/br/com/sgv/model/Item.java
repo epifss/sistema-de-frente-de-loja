@@ -25,7 +25,7 @@ public class Item {
     @OneToOne
     private Produto produto;
     @OneToOne
-    private Carrinho venda;
+    private Venda venda;
     private int quantidade;
 
     public Item(){

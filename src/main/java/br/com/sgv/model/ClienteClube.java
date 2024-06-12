@@ -4,35 +4,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-
 
 /**
  *
  * @author Pablo Rangel <pablo.rangel@gmail.com>
  * @date 12/05/2021
- * @brief  class Pessoa
+ * @brief  class ClienteClube
  */
 @Entity
 @Getter
 @Setter
-@Inheritance (strategy=InheritanceType.JOINED)
-public abstract class Pessoa{
-    
+public class ClienteClube {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
-    @Size(min = 1, max = 11, message = "O nome deverá ter no máximo {max} caracteres")
-    private String cpf;
     @Size(min=1,message = "O nome precisa ser válido.")
     private String nome;
-    @Override
-    public String toString(){
-        return nome;
+    @Size(min=1,message = "O CPF precisa ser válido.")
+    private String cpf;
+
+    public boolean temDesconto() {
+        return true;
     }
-    
 }

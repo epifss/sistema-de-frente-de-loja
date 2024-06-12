@@ -29,7 +29,7 @@ public class Usuario {
     private String login;
     private String senha;
     private String papel;
-    private boolean adm; 
+
     public void setSenha(String senha) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         this.senha = encoder.encode(senha);

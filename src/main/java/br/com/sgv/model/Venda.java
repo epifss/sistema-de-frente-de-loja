@@ -1,11 +1,9 @@
 package br.com.sgv.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,8 +12,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import lombok.Getter;
-import lombok.Setter;
 
 
 /**
@@ -27,7 +23,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Carrinho implements Serializable{
+@Inheritance (strategy=InheritanceType.JOINED)
+public abstract class Venda{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
@@ -51,7 +48,7 @@ public class Carrinho implements Serializable{
         try {
             data = formato.parse(dataVenda);
         } catch (ParseException ex) {
-            Logger.getLogger(Carrinho.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Venda.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dataVenda = data;
     }
@@ -64,13 +61,6 @@ public class Carrinho implements Serializable{
         listaItens.remove(item);
     }
     
-    public float calcularTotal(){
-        float soma = 0;
-        for (Item i : listaItens){
-            soma += i.getProduto().getPreco() * i.getQuantidade();
-        }
-        return soma;
-       
-    }
+    public abstract double calcularTotal();
     
 }
