@@ -24,10 +24,12 @@ public class VendaClienteClube extends Venda{
         for (Item i : getListaItens()){
             soma += i.getProduto().getPreco() * i.getQuantidade();
         }
+
         if (soma>=300) {
             return soma * 0.8;
         }else{
             return soma * 0.9;
     }
-  }
+    }
+    
 }

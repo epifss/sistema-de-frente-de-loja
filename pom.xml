@@ -11,7 +11,7 @@
     <groupId>br.com</groupId>
     <artifactId>sgv</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>FB serviços de TI</name>
+    <name>sgv</name>
     <description>Sistema Gerenciador de Vendas</description>
     <properties>
         <java.version>17</java.version>
