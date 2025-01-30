@@ -13,12 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-/**
- *
- * @author Pablo Rangel <pablo.rangel@gmail.com>
- * @date 22/04/2021
- * @brief class ClienteClubeController
- */
+
 @Controller
 public class ClienteClubeController {
 
